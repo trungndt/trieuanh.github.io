@@ -1736,6 +1736,9 @@ footer .copyright .block {
 	font-size: 20px;
 }
 /* Timeline */
+#couple-story {
+	padding-bottom: 0;
+}
 .timeline {
 	list-style: none;
 	padding: 0;
@@ -1748,7 +1751,7 @@ footer .copyright .block {
 	position: absolute;
 	content: " ";
 	width: 1px;
-	height: 65%;
+	height: 80%;
 	background-color: #ccc;
 	left: 30px;
 }
@@ -1846,6 +1849,9 @@ footer .copyright .block {
 	border-right-width: 14px;
 	left: -14px;
 	right: auto;
+}
+.timeline-item {
+	min-height: 200px;
 }
 .timeline .timeline-title {
 	margin-top: 0;

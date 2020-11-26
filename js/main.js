@@ -60,11 +60,11 @@
 		$form.submit(function (e) {
 			e.preventDefault();
 			var attendArr = [];
-			$('[name=attend]').each(function() { 
+			$('[name=attend]:checked').each(function() { 
 				attendArr.push($(this).val());
 			});
 			$('[name="events"]').val(attendArr.join(' + '));
-			
+
 			$.ajax({
 				url: "https://api.apispreadsheets.com/data/4072/",
 				type: "post",

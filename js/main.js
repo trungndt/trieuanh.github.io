@@ -59,11 +59,16 @@
 		var $form = $('#contact-form');
 		$form.submit(function (e) {
 			e.preventDefault();
-
+			var attendArr = [];
+			$('[name=attend]').each(function() { 
+				attendArr.push($(this).val());
+			});
+			$('[name="events"]').val(attendArr.join(' + '));
+			
 			$.ajax({
-				url:"https://api.apispreadsheets.com/data/4072/",
-				type:"post",
-				data:$form.serializeArray(),
+				url: "https://api.apispreadsheets.com/data/4072/",
+				type: "post",
+				data: $form.serializeArray(),
 				success: function(){
 					// alert("Form Data Submitted :)")
 					$form.html('<div class="message-success"></div>');

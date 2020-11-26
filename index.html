@@ -434,7 +434,7 @@
 			</div>
 		</section>
 		<!-- Section Counter -->
-		<section id="counter" class="section bg counter">
+		<section id="counter" class="section bg counter" hidden>
 			<div class="overlay"></div>
 			<div class="container">
 				<div class="row">
@@ -538,11 +538,15 @@
 				<div class="row">
 					<div class="col-md-12 text-center heading">
 						<h2>Video invitation</h2>
-						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam</p>
+						<p></p>
 					</div>
 				</div>
 				<div class="row">
-					<div class="form-wrapper col-md-6">
+					<div class="form-wrapper col-md-6 col-md-offset-3">
+						<form id="testForm">
+							<input type="text" name="guest_name">
+							<button type="submit">Click test</button>
+						</form>
 						<form action="http://pavlyukpetr.com/projects/wedding-belle/form.php" id="contact-form" class="form-horizontal" method="post">
 							<h3 class="text-center">Will you be attending the wedding?</h3>
 							<div class="row">
@@ -585,15 +589,6 @@
 								</div>
 							</div>
 						</form>
-					</div>
-
-					<div class="col-md-6">
-						<div class="video bg">
-							<a href="https://www.youtube.com/watch?v=KPi8uXHRfYg" class="popup-youtube">
-								<i class="fa fa-youtube-play fa-5x"></i>
-							</a>
-							<div class="overlay"></div>
-						</div>
 					</div>
 				</div>
 			</div>

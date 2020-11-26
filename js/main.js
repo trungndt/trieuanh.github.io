@@ -66,7 +66,7 @@
 				data:$form.serializeArray(),
 				success: function(){
 					// alert("Form Data Submitted :)")
-					$form.html('<div class="message-success">' + data.message + '</div>');
+					$form.html('<div class="message-success"></div>');
 				},
 				error: function(){
 					// alert("There was an error :(")

@@ -537,55 +537,88 @@
 			<div class="container">
 				<div class="row">
 					<div class="col-md-12 text-center heading">
-						<h2>Video invitation</h2>
-						<p></p>
+						<h2>Invitation</h2>
+						<p>Cảm ơn bạn đã hỗ trợ tụi mình xác định số lượng bàn tiệc phù hợp</p>
 					</div>
 				</div>
 				<div class="row">
 					<div class="form-wrapper col-md-6 col-md-offset-3">
-						<form id="testForm">
-							<input type="text" name="guest_name">
-							<button type="submit">Click test</button>
-						</form>
-						<form action="http://pavlyukpetr.com/projects/wedding-belle/form.php" id="contact-form" class="form-horizontal" method="post">
-							<h3 class="text-center">Will you be attending the wedding?</h3>
+						<form id="contact-form" class="form-horizontal" method="post">
+							<h4 class="text-center">Thông tin của bạn</h4>
 							<div class="row">
-								<div class="form-field switch-field col-sm-12">
-									<input type="radio" name="rdo" id="yes" value="Yes"/>
-									<input type="radio" name="rdo" id="no" value="No"/>
+								<div id="name-field" class="form-field col-sm-8">
+									<label for="form-name" class="control-label">Tên của bạn*</label>
+									<input type="text" class="form-control" id="form-name" name="name" required="">
+								</div>
+								<div id="email-field" class="form-field col-sm-4">
+									<label for="form-phone" class="control-label">Số điện thoại*</label>
+									<input type="tel" class="form-control" id="form-phone" name="phone" required="">
+								</div>
+							</div>
+							<!-- <div class="row">
+								<div id="guest-name-field" class="form-field col-sm-8">
+									<label for="form-buddy" class="control-label">Bạn đi cùng với?</label>
+									<input type="text" class="form-control" id="form-buddy" name="buddy">
+								</div>
+							</div> -->
+							<br>
+
+							<h4 class="text-center">Tiệc tham dự (có thể chọn cả 2 nha)</h4>
+							<div class="row">
+								<div class="form-field switch-field switch-field-checkbox col-sm-12">
 									<div class="switch">
-										<label for="yes">Yes</label>
-										<label for="no">No</label>
-										<span></span>
+										<div class="switch-group">
+											<input type="checkbox" name="events" id="vuquy" value="vuquy"/>
+											<label for="vuquy">Vu Quy (11/12/2020)</label>
+										</div>
+										<div class="switch-group">
+											<input type="checkbox" name="events" id="tanhon" value="tanhon"/>
+											<label for="tanhon">Tân Hôn (13/12/2020)</label>
+										</div>
 									</div>
 								</div>
 							</div>
+
+							<br>
+							
+							<h4 class="text-center">Bạn có đi cùng với ai không?</h4>
 							<div class="row">
-								<div id="name-field" class="form-field col-sm-6">
-									<label for="form-name" class="control-label">Your name*</label>
-									<input type="text" class="form-control" id="form-name" name="form-name" required="">
-								</div>
-								<div id="email-field" class="form-field col-sm-6">
-									<label for="form-email" class="control-label">Email*</label>
-									<input type="email" class="form-control" id="form-email" name="form-email" required="">
+								<div class="form-field switch-field col-sm-12">
+									<div class="switch">
+										<div class="switch-group">
+											<input type="radio" name="buddy" id="buddy_yes" value="Yes"/>
+											<label for="buddy_yes">Có</label>
+										</div>
+										<div class="switch-group">
+											<input type="radio" name="buddy" id="buddy_no" value="No"/>
+											<label for="buddy_no">Không</label>
+										</div>
+									</div>
 								</div>
 							</div>
-							<h3 class="text-center">Who else is comming with you?</h3>
+
+							<br>
+
+							<h4 class="text-center">Bạn có ăn chay không?</h4>
 							<div class="row">
-								<div id="guest-name-field" class="form-field col-sm-8">
-									<label for="form-guest-name" class="control-label">Guest name</label>
-									<input type="text" class="form-control" id="form-guest-name" name="form-name">
-								</div>
-								<div class="form-field col-sm-4 text-center">
-									<button type="button" class="add-button">Add guest</button>
+								<div class="form-field switch-field col-sm-12">
+									<div class="switch">
+										<div class="switch-group">
+											<input type="radio" name="vegie" id="vegie_yes" value="Yes"/>
+											<label for="vegie_yes">Có</label>
+										</div>
+										<div class="switch-group">
+											<input type="radio" name="vegie" id="vegie_no" value="No"/>
+											<label for="vegie_no">Không</label>
+										</div>
+									</div>
 								</div>
 							</div>
-							<div class="row">
-								<div class="guest-list form-field col-sm-12"></div>
-							</div>
+							<hr>
+
 							<div class="row">
 								<div class="col-sm-12 text-center">
-									<button type="submit" class="btn-primary btn-lg send-button">Submit</button>
+									<button type="submit" class="btn-primary btn-lg send-button">Gửi</button>
 								</div>
 							</div>
 						</form>

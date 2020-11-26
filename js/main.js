@@ -66,7 +66,7 @@
 			$('[name="events"]').val(attendArr.join(' + '));
 
 			$.ajax({
-				url: "https://api.apispreadsheets.com/data/4072/",
+				url: "https://api.apispreadsheets.com/data/4079/",
 				type: "post",
 				data: $form.serializeArray(),
 				success: function(){

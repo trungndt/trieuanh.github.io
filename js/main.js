@@ -223,8 +223,11 @@
 			lazy: true,
 			speed: 3000,
 			autoplay: {
-				delay: 8000,
+				delay: 6000,
 				disableOnInteraction: false,
+			},
+			pagination: {
+				el: '.swiper-pagination',
 			},
 		  });
 	};

@@ -33,13 +33,12 @@
 	<link rel="stylesheet" type="text/css" href="fonts/font-awesome-4.7.0/css/font-awesome.min.css">
 	<!-- Bootstrap  -->
 	<link rel="stylesheet" href="css/vendor/bootstrap.min.css">
-	<!-- Magnific Popup -->
-	<link rel="stylesheet" href="css/vendor/magnific-popup.css">
 	<!-- Owl Carousel  -->
 	<link rel="stylesheet" href="css/vendor/owl.carousel.min.css">
 	<link rel="stylesheet" href="css/vendor/owl.theme.default.min.css">
 	<!-- Lightbox -->
 	<link rel="stylesheet" href="css/vendor/lightbox.min.css">
+	<link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
 
 	<!-- Theme style  -->
 	<link rel="stylesheet" href="css/main.css">
@@ -80,17 +79,29 @@
 		</nav>
 		<!-- Header -->
 		<section id="header" class="cover" data-parallax="scroll" data-image-src="img/header-bg.jpg">
+			<div class="swiper-container" id="heroSwiper" >
+				<div class="swiper-wrapper">
+					<div class="swiper-slide" style="background-image:url(./img/hero-1.jpg)"></div>
+					<div class="swiper-slide" style="background-image:url(./img/hero-2.jpg)"></div>
+					<div class="swiper-slide" style="background-image:url(./img/hero-3.jpg)"></div>
+					<div class="swiper-slide" style="background-image:url(./img/hero-4.jpg)"></div>
+					<div class="swiper-slide" style="background-image:url(./img/hero-5.jpg)"></div>
+					<div class="swiper-slide" style="background-image:url(./img/hero-6.jpg)"></div>
+				</div>
+			</div>
 			<div class="overlay"></div>
-			<div class="container">
-				<div class="row">
-					<div class="col-md-12 text-center">
-						<div class="display-t">
-							<div class="display-tc animated">
-								<h1>Save the date</h1>
-								<div class="banner-text">
-									<!-- <span class="banner-text_city">Gò Vấp <br>TP.HCM</span> -->
-									<span class="banner-text_names">Hữu Đức&nbsp;&&nbsp;Triều Anh</span>
-									<!-- <span class="banner-text_date">11/12 <br>2020</span> -->
+			<div class="content-overlay">
+				<div class="container">
+					<div class="row">
+						<div class="col-md-12 text-center">
+							<div class="display-t">
+								<div class="display-tc animated">
+									<h1>Save the date</h1>
+									<div class="banner-text">
+										<!-- <span class="banner-text_city">Gò Vấp <br>TP.HCM</span> -->
+										<span class="banner-text_names">Hữu Đức&nbsp;&&nbsp;Triều Anh</span>
+										<!-- <span class="banner-text_date">11/12 <br>2020</span> -->
+									</div>
 								</div>
 							</div>
 						</div>
@@ -660,9 +671,9 @@
 	<script src="js/vendor/jquery.countTo.js"></script>
 	<!-- Parallax -->
 	<script src="js/vendor/parallax.min.js"></script>
+	<script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+
 	<!-- Magnific Popup -->
-	<script src="js/vendor/jquery.magnific-popup.min.js"></script>
-	<script src="js/vendor/magnific-popup-options.js"></script>
 	<script src="js/vendor/lightbox.min.js"></script>
 	<script src="js/vendor/isotope.pkgd.min.js"></script>
 	<script src="js/vendor/imagesloaded.pkgd.min.js"></script>

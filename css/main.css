@@ -192,13 +192,21 @@ ol {
 	animation: rotate 1s linear infinite;
 }
 .overlay {
-	z-index: 0;
+	z-index: 2;
 	position: absolute;
 	bottom: 0;
 	top: 0;
 	left: 0;
 	right: 0;
 	background: rgba(51, 51, 51, 0.5);
+}
+.content-overlay {
+	z-index: 3;
+	position: absolute;
+	bottom: 0;
+	top: 0;
+	left: 0;
+	right: 0;
 }
 .display-t,
 .display-tc {
@@ -209,7 +217,9 @@ ol {
 .display-tc {
 	display: table-cell !important;
 	vertical-align: bottom;
-	padding-bottom: 80px;
+	padding-bottom: 50px;
+	/* vertical-align: top;
+	padding-top: 80px; */
 }
 .display-tc h1, .display-tc h2 {
 	margin: 0;
@@ -225,7 +235,8 @@ ol {
 }
 @media only screen and (min-width: 768px) {
 	.display-tc h1 {
-		font-size: 150px;
+		/* font-size: 150px; */
+		font-size: 100px;
 	}
 }
 .display-tc h1:before, .display-tc h1:after {
@@ -244,7 +255,8 @@ ol {
 }
 @media only screen and (min-width: 768px) {
 	.display-tc h2 {
-		font-size: 20px;
+		/* font-size: 20px; */
+		font-size: 16px;
 	}
 }
 .display-tc .btn {
@@ -273,11 +285,11 @@ ol {
 }
 span.banner-text_names {
 	font-family: "Pacifico", cursive;
-	font-size: 40px;
+	font-size: 30px;
 	line-height: 43px;
 	position: relative;
 }
-span.banner-text_names:before, span.banner-text_names:after {
+/* span.banner-text_names:before, span.banner-text_names:after {
 	content: '';
 	display: block;
 	position: absolute;
@@ -291,7 +303,7 @@ span.banner-text_names:before {
 }
 span.banner-text_names:after {
 	right: -1px;
-}
+} */
 .js .animate-box {
 	opacity: 0;
 }
@@ -632,6 +644,14 @@ img {
 .cover .display-tc {
 	opacity: 0;
 }
+.swiper-container, .swiper-wrapper, .swiper-slide {
+	width: 100%;
+	height: 100vh;
+}
+.swiper-slide {
+	background-size: cover;
+	background-position: center;
+}
 /* About-us */
 .couple-wrap {
 	width: 90%;
@@ -767,6 +787,20 @@ img {
 .events-accordion .panel-place {
 	padding: 5px 15px 0;
 }
+.events-accordion .panel-group {
+	margin-bottom: 0;
+}
+#accordion.panel-group {
+	padding: 40px 0;
+}
+#accordion .panel + .panel {
+	margin-top: 30px;
+}
+#accordion .panel-default > .panel-heading {
+	padding: 15px;
+	margin-bottom: 10px;
+}
+
 /* Our story */
 /* Timeline */
 .timeline {
@@ -1809,7 +1843,7 @@ footer .copyright .block {
 	}
 }
 .timeline > li {
-	margin-bottom: 20px;
+	margin-bottom: 0px;
 	position: relative;
 }
 .timeline > li:last-child {
@@ -1844,7 +1878,7 @@ footer .copyright .block {
 	width: 75%;
 	float: right;
 	border: 1px solid #ccc;
-	padding: 30px;
+	padding: 20px;
 	position: relative;
 	border-radius: 4px;
 }
@@ -1899,7 +1933,7 @@ footer .copyright .block {
 	right: auto;
 }
 .timeline-item {
-	min-height: 200px;
+	min-height: 180px;
 }
 .timeline .timeline-title {
 	margin-top: 0;

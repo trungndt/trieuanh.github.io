@@ -215,6 +215,20 @@
 		});
 	};
 
+	// Hero Swiper
+	var heroSwiper = function(){
+		var swiper = new Swiper('.swiper-container', {
+			effect: 'fade',
+			loop: true,
+			lazy: true,
+			speed: 300,
+			autoplay: {
+				delay: 800,
+				disableOnInteraction: false,
+			},
+		  });
+	};
+
 	// Counter
 	var counter = function() {
 		$('.js-counter').countTo({
@@ -429,6 +443,7 @@
 		contentWayPoint();
 		dropdown();
 		testimonialCarousel();
+		heroSwiper();
 		counter();
 		counterWayPoint();
 		countdown();

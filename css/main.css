@@ -214,6 +214,13 @@ ol {
 	display: table;
 	width: 100%;
 }
+
+@media only screen and (max-width: 768px) {
+	.display-t,
+	.display-tc {
+		height: 40vh;
+	}
+}
 .display-tc {
 	display: table-cell !important;
 	vertical-align: bottom;
@@ -637,6 +644,11 @@ img {
 	position: relative;
 	width: 100%;
 }
+@media only screen and (max-width: 768px) {
+	.cover {
+		height: 40vh;
+	}
+}
 .cover > .container {
 	position: relative;
 	z-index: 10;
@@ -646,7 +658,7 @@ img {
 }
 .swiper-container, .swiper-wrapper, .swiper-slide {
 	width: 100%;
-	height: 100vh;
+	height: 100%;
 }
 .swiper-slide {
 	background-size: cover;
@@ -790,15 +802,17 @@ img {
 .events-accordion .panel-group {
 	margin-bottom: 0;
 }
-#accordion.panel-group {
-	padding: 40px 0;
-}
-#accordion .panel + .panel {
-	margin-top: 30px;
-}
 #accordion .panel-default > .panel-heading {
 	padding: 15px;
 	margin-bottom: 10px;
+}
+@media (min-width: 768px) {
+	#accordion.panel-group {
+		padding: 40px 0;
+	}
+	#accordion .panel + .panel {
+		margin-top: 30px;
+	}
 }
 
 /* Our story */

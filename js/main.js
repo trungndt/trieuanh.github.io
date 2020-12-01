@@ -221,9 +221,9 @@
 			effect: 'fade',
 			loop: true,
 			lazy: true,
-			speed: 300,
+			speed: 3000,
 			autoplay: {
-				delay: 800,
+				delay: 8000,
 				disableOnInteraction: false,
 			},
 		  });

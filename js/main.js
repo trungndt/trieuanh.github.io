@@ -12,75 +12,79 @@
 	// Form
 	var contactForm = function() {
 		(function ($, window, document, undefined) {
-		// var $form = $('#contact-form');
-		// $form.submit(function (e) {
-		// 	// remove the error class
-		// 	$('.form-group').removeClass('has-error');
-		// 	$('.help-block').remove();
-		// 	var guestsList = [];
-		// 	$('.guest-list input').each(function() {
-		// 		guestsList.push(this.value);
-		// 	});
-		// 	// get the form data
-		// 	var formData = {
-		// 		'name' : $('input[name="form-name"]').val(),
-		// 		'email' : $('input[name="form-email"]').val(),
-		// 		'attending': $('.switch-field input[type="radio"]:checked').attr('id'),
-		// 		'guest': guestsList.join(', ')
-		// 	};
-		// 	// process the form
-		// 	$.ajax({
-		// 		type : 'POST',
-		// 		url  : 'form.php',
-		// 		data : formData,
-		// 		dataType : 'json',
-		// 		encode : true
-		// 	}).done(function (data) {
-		// 		// handle errors
-		// 		if (!data.success) {
-		// 			if (data.errors.name) {
-		// 				$('#name-field').addClass('has-error');
-		// 				$('#name-field').find('.col-sm-6').append('<span class="help-block">' + data.errors.name + '</span>');
-		// 			}
-		// 			if (data.errors.email) {
-		// 				$('#email-field').addClass('has-error');
-		// 				$('#email-field').find('.col-sm-6').append('<span class="help-block">' + data.errors.email + '</span>');
-		// 			}
-		// 		} else {
-		// 			// display success message
-		// 			$form.html('<div class="message-success">' + data.message + '</div>');
-		// 		}
-		// 	}).fail(function (data) {
-		// 		// for debug
-		// 		// console.log(data);
-		// 	});
-		// 	e.preventDefault();
-		// });
-		var $form = $('#contact-form');
-		$form.submit(function (e) {
-			e.preventDefault();
-			var attendArr = [];
-			$('[name=attend]:checked').each(function() { 
-				attendArr.push($(this).val());
-			});
-			$('[name="events"]').val(attendArr.join(' + '));
+			// var $form = $('#contact-form');
+			// $form.submit(function (e) {
+			// 	// remove the error class
+			// 	$('.form-group').removeClass('has-error');
+			// 	$('.help-block').remove();
+			// 	var guestsList = [];
+			// 	$('.guest-list input').each(function() {
+			// 		guestsList.push(this.value);
+			// 	});
+			// 	// get the form data
+			// 	var formData = {
+			// 		'name' : $('input[name="form-name"]').val(),
+			// 		'email' : $('input[name="form-email"]').val(),
+			// 		'attending': $('.switch-field input[type="radio"]:checked').attr('id'),
+			// 		'guest': guestsList.join(', ')
+			// 	};
+			// 	// process the form
+			// 	$.ajax({
+			// 		type : 'POST',
+			// 		url  : 'form.php',
+			// 		data : formData,
+			// 		dataType : 'json',
+			// 		encode : true
+			// 	}).done(function (data) {
+			// 		// handle errors
+			// 		if (!data.success) {
+			// 			if (data.errors.name) {
+			// 				$('#name-field').addClass('has-error');
+			// 				$('#name-field').find('.col-sm-6').append('<span class="help-block">' + data.errors.name + '</span>');
+			// 			}
+			// 			if (data.errors.email) {
+			// 				$('#email-field').addClass('has-error');
+			// 				$('#email-field').find('.col-sm-6').append('<span class="help-block">' + data.errors.email + '</span>');
+			// 			}
+			// 		} else {
+			// 			// display success message
+			// 			$form.html('<div class="message-success">' + data.message + '</div>');
+			// 		}
+			// 	}).fail(function (data) {
+			// 		// for debug
+			// 		// console.log(data);
+			// 	});
+			// 	e.preventDefault();
+			// });
+			var $form = $('#contact-form');
+			var $overlay = $('.form-overlay');
+			
+			$form.submit(function (e) {
+				e.preventDefault();
+				$overlay.fadeIn();
+				var attendArr = [];
+				$('[name=attend]:checked').each(function() { 
+					attendArr.push($(this).val());
+				});
+				$('[name="events"]').val(attendArr.join(' + '));
 
-			$.ajax({
-				url: "https://api.apispreadsheets.com/data/4079/",
-				type: "post",
-				data: $form.serializeArray(),
-				success: function(){
-					// alert("Form Data Submitted :)")
-					$form.html('<div class="message-success"></div>');
-				},
-				error: function(){
-					// alert("There was an error :(")
-				}
-			});
-		})
+				$.ajax({
+					url: "https://api.apispreadsheets.com/data/4079/",
+					type: "post",
+					data: $form.serializeArray(),
+					success: function(){
+						// alert("Form Data Submitted :)")
+						$form.html('<div class="message-success"></div>');
+						$overlay.hide();
+					},
+					error: function(){
+						// alert("There was an error :(")
+					}
+				});
+			})
 
 
-	}(jQuery, window, document));
+		}(jQuery, window, document));
 	}
 
 	// Offcanvas
@@ -229,6 +233,10 @@
 			pagination: {
 				el: '.swiper-pagination',
 			},
+			// navigation: {
+			// 	nextEl: '.swiper-button-next',
+			// 	prevEl: '.swiper-button-prev',
+			// },
 		  });
 	};
 

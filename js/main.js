@@ -1,69 +1,26 @@
-;(function () {
+;
+(function () {
 	'use strict';
 
-	$(window).on('load', function() {
+	$(window).on('load', function () {
 		$('.loader').delay(600).fadeOut('slow');
-		setTimeout(function() {
+		setTimeout(function () {
 			$('.cover .display-tc').addClass('fadeInUp');
 		}, 800);
-		
+
 	});
 
 	// Form
-	var contactForm = function() {
+	var contactForm = function () {
 		(function ($, window, document, undefined) {
-			// var $form = $('#contact-form');
-			// $form.submit(function (e) {
-			// 	// remove the error class
-			// 	$('.form-group').removeClass('has-error');
-			// 	$('.help-block').remove();
-			// 	var guestsList = [];
-			// 	$('.guest-list input').each(function() {
-			// 		guestsList.push(this.value);
-			// 	});
-			// 	// get the form data
-			// 	var formData = {
-			// 		'name' : $('input[name="form-name"]').val(),
-			// 		'email' : $('input[name="form-email"]').val(),
-			// 		'attending': $('.switch-field input[type="radio"]:checked').attr('id'),
-			// 		'guest': guestsList.join(', ')
-			// 	};
-			// 	// process the form
-			// 	$.ajax({
-			// 		type : 'POST',
-			// 		url  : 'form.php',
-			// 		data : formData,
-			// 		dataType : 'json',
-			// 		encode : true
-			// 	}).done(function (data) {
-			// 		// handle errors
-			// 		if (!data.success) {
-			// 			if (data.errors.name) {
-			// 				$('#name-field').addClass('has-error');
-			// 				$('#name-field').find('.col-sm-6').append('<span class="help-block">' + data.errors.name + '</span>');
-			// 			}
-			// 			if (data.errors.email) {
-			// 				$('#email-field').addClass('has-error');
-			// 				$('#email-field').find('.col-sm-6').append('<span class="help-block">' + data.errors.email + '</span>');
-			// 			}
-			// 		} else {
-			// 			// display success message
-			// 			$form.html('<div class="message-success">' + data.message + '</div>');
-			// 		}
-			// 	}).fail(function (data) {
-			// 		// for debug
-			// 		// console.log(data);
-			// 	});
-			// 	e.preventDefault();
-			// });
 			var $form = $('#contact-form');
-			var $overlay = $('.form-overlay');
-			
+			var $overlay = $('#contactFormOverlay');
+
 			$form.submit(function (e) {
 				e.preventDefault();
 				$overlay.fadeIn();
 				var attendArr = [];
-				$('[name=attend]:checked').each(function() { 
+				$('[name=attend]:checked').each(function () {
 					attendArr.push($(this).val());
 				});
 				$('[name="events"]').val(attendArr.join(' + '));
@@ -72,23 +29,79 @@
 					url: "https://api.apispreadsheets.com/data/4079/",
 					type: "post",
 					data: $form.serializeArray(),
-					success: function(){
-						// alert("Form Data Submitted :)")
+					success: function () {
 						$form.html('<div class="message-success"></div>');
 						$overlay.hide();
 					},
-					error: function(){
-						// alert("There was an error :(")
-					}
+					error: function () {}
 				});
 			})
+		}(jQuery, window, document));
+	}
 
+	var getWishTemplate = function(name, wish, avatar) {
+		var $item = $($('#tmpWishItem').html().trim())
+		$item.find('[data-role="name"]').html(name)
+		$item.find('[data-role="wish"]').html('"' + wish + '"')
+		if (avatar != '') {
+			$item.find('img').attr('src', avatar)
+		}
+		return $item
+	}
 
+	var wishesForm = function () {
+		(function ($, window, document, undefined) {
+			var $form = $('#wishes-form');
+			var $overlay = $('#wishesFormOverlay');
+
+			$form.submit(function (e) {
+				e.preventDefault();
+				$overlay.fadeIn();
+				$.ajax({
+					url: "https://api.apispreadsheets.com/data/4535/",
+					type: "post",
+					data: $form.serializeArray(),
+					success: function () {
+						getWishes();
+						$overlay.hide();
+						$form.hide();
+						$('#wishesThanks').fadeIn();
+					},
+					error: function () {}
+				});
+			})
+		}(jQuery, window, document));
+	}
+
+	var getWishes = function () {
+		var $container = $('.wrap-testimony');
+		var $loader = $('.testi-loader');
+		var owlCls = 'owl-carousel-fullwidth'
+		$loader.show();
+		$container.find('.' + owlCls).remove();
+		$container.append('<div class="' + owlCls + '"></div>');
+		(function ($, window, document, undefined) {
+			fetch("https://api.apispreadsheets.com/data/4535/").then(res => {
+				if (res.status === 200) {
+					// SUCCESS
+					res.json().then(data => {
+						const wishesList = data.data;
+						wishesList.reverse().forEach(function(e) {
+							var $item = getWishTemplate(e.name, e.wish, e.avatar)
+							$container.find('.' + owlCls).append($item)
+							$loader.fadeOut();
+						})
+						testimonialCarousel();
+					}).catch(err => console.log(err))
+				} else {
+					// ERROR
+				}
+			})
 		}(jQuery, window, document));
 	}
 
 	// Offcanvas
-	var offcanvasMenu = function() {
+	var offcanvasMenu = function () {
 		$('.main').prepend('<div id="offcanvas" />');
 		$('.main').prepend('<a href="#" class="js-nav-toggle nav-toggle nav-white"><i></i></a>');
 		var clone1 = $('.menu-1 > ul').clone();
@@ -101,8 +114,8 @@
 			.find('li')
 			.removeClass('has-dropdown');
 
-		$(window).on('resize', function() {
-			if ( $('body').hasClass('offcanvas') ) {
+		$(window).on('resize', function () {
+			if ($('body').hasClass('offcanvas')) {
 				$('body').removeClass('offcanvas');
 				$('.js-nav-toggle').removeClass('active');
 			}
@@ -110,10 +123,10 @@
 	};
 
 	// Page scroll
-	var pageScroll = function() {
-		$('body').on('click touch', '.page-scroll', function(event) {
+	var pageScroll = function () {
+		$('body').on('click touch', '.page-scroll', function (event) {
 			var $anchor = $(this);
-			if ( $('body').hasClass('overflow offcanvas') ) {
+			if ($('body').hasClass('overflow offcanvas')) {
 				$('body').removeClass('overflow offcanvas');
 			} else {
 				$('body').addClass('overflow offcanvas');
@@ -132,23 +145,23 @@
 	};
 
 	// Mobile menu
-	var mobileMenuOutsideClick = function() {
+	var mobileMenuOutsideClick = function () {
 		$(document).on('click', function (e) {
-		var container = $("#offcanvas, .js-nav-toggle");
-		if (!container.is(e.target) && container.has(e.target).length === 0) {
-			if ( $('body').hasClass('offcanvas') ) {
-				$('body').removeClass('offcanvas');
-				$('.js-nav-toggle').removeClass('active');
+			var container = $("#offcanvas, .js-nav-toggle");
+			if (!container.is(e.target) && container.has(e.target).length === 0) {
+				if ($('body').hasClass('offcanvas')) {
+					$('body').removeClass('offcanvas');
+					$('.js-nav-toggle').removeClass('active');
+				}
 			}
-		}
 		});
 	};
 
 	// // Burgermenu
-	var burgerMenu = function() {
-		$('body').on('click', '.js-nav-toggle', function(event){
+	var burgerMenu = function () {
+		$('body').on('click', '.js-nav-toggle', function (event) {
 			var $this = $(this);
-			if ( $('body').hasClass('overflow offcanvas') ) {
+			if ($('body').hasClass('overflow offcanvas')) {
 				$('body').removeClass('overflow offcanvas');
 			} else {
 				$('body').addClass('overflow offcanvas');
@@ -159,43 +172,45 @@
 	};
 
 	// Content way point
-	var contentWayPoint = function() {
+	var contentWayPoint = function () {
 		var i = 0;
-		$('.animate-box').waypoint( function( direction ) {
-			if( direction === 'down' && !$(this.element).hasClass('animated-fast') ) {
+		$('.animate-box').waypoint(function (direction) {
+			if (direction === 'down' && !$(this.element).hasClass('animated-fast')) {
 				i++;
 				$(this.element).addClass('item-animate');
-				setTimeout(function(){
-					$('body .animate-box.item-animate').each(function(k){
+				setTimeout(function () {
+					$('body .animate-box.item-animate').each(function (k) {
 						var el = $(this);
-						setTimeout( function () {
+						setTimeout(function () {
 							var effect = el.data('animate-effect');
-							if ( effect === 'fadeIn') {
+							if (effect === 'fadeIn') {
 								el.addClass('fadeIn animated-fast');
-							} else if ( effect === 'fadeInLeft') {
+							} else if (effect === 'fadeInLeft') {
 								el.addClass('fadeInLeft animated-fast');
-							} else if ( effect === 'fadeInRight') {
+							} else if (effect === 'fadeInRight') {
 								el.addClass('fadeInRight animated-fast');
 							} else {
 								el.addClass('fadeInUp animated-fast');
 							}
 							el.removeClass('item-animate');
-						}, k * 200, 'easeInOutExpo' );
+						}, k * 200, 'easeInOutExpo');
 					});
 				}, 100);
 			}
-		} , { offset: '85%' } );
+		}, {
+			offset: '85%'
+		});
 	};
 
 	// Dropdown
-	var dropdown = function() {
-		$('.has-dropdown').mouseenter(function(){
+	var dropdown = function () {
+		$('.has-dropdown').mouseenter(function () {
 			var $this = $(this);
 			$this
 				.find('.dropdown')
 				.css('display', 'block')
 				.addClass('animated-fast fadeInUpMenu');
-		}).mouseleave(function(){
+		}).mouseleave(function () {
 			var $this = $(this);
 			$this
 				.find('.dropdown')
@@ -205,7 +220,7 @@
 	};
 
 	// Testimonials
-	var testimonialCarousel = function(){
+	var testimonialCarousel = function () {
 		var owl = $('.owl-carousel-fullwidth');
 		owl.owlCarousel({
 			items: 1,
@@ -220,7 +235,7 @@
 	};
 
 	// Hero Swiper
-	var heroSwiper = function(){
+	var heroSwiper = function () {
 		var swiper = new Swiper('.swiper-container', {
 			effect: 'fade',
 			loop: true,
@@ -237,31 +252,33 @@
 			// 	nextEl: '.swiper-button-next',
 			// 	prevEl: '.swiper-button-prev',
 			// },
-		  });
-	};
-
-	// Counter
-	var counter = function() {
-		$('.js-counter').countTo({
-			formatter: function (value, options) {
-			return value.toFixed(options.decimals);
-		},
 		});
 	};
 
-	var counterWayPoint = function() {
-		if ($('#counter').length > 0 ) {
-			$('#counter').waypoint( function( direction ) {
-				if( direction === 'down' && !$(this.element).hasClass('animated') ) {
-					setTimeout( counter , 400);
+	// Counter
+	var counter = function () {
+		$('.js-counter').countTo({
+			formatter: function (value, options) {
+				return value.toFixed(options.decimals);
+			},
+		});
+	};
+
+	var counterWayPoint = function () {
+		if ($('#counter').length > 0) {
+			$('#counter').waypoint(function (direction) {
+				if (direction === 'down' && !$(this.element).hasClass('animated')) {
+					setTimeout(counter, 400);
 					$(this.element).addClass('animated');
 				}
-			} , { offset: '90%' } );
+			}, {
+				offset: '90%'
+			});
 		}
 	};
 
 	// Countdown
-	var countdown = function() {
+	var countdown = function () {
 		var countdown = document.querySelector('.countdown');
 
 		function getTimeRemaining(endtime) {
@@ -291,7 +308,7 @@
 				var t = getTimeRemaining(endtime);
 				var daysArr = String(t.days).split('');
 				daysSpan.innerHTML = '';
-				for (var i = 0; i < daysArr.length; i++){
+				for (var i = 0; i < daysArr.length; i++) {
 					newChild = document.createElement('span');
 					newChild.innerHTML = daysArr[i];
 					daysSpan.appendChild(newChild);
@@ -326,7 +343,7 @@
 		}
 		// set your wedding date here
 		var deadline = 'December 11 2020 19:00:00';
-		if (countdown){
+		if (countdown) {
 			initializeClock('timer', deadline);
 		}
 	}
@@ -334,9 +351,9 @@
 	// Form
 	function filledLabels() {
 		var inputFields = $('.control-label').next();
-		inputFields.each(function(){
+		inputFields.each(function () {
 			var singleInput = $(this);
-			singleInput.on('focus blur', function(event){
+			singleInput.on('focus blur', function (event) {
 				checkVal(singleInput);
 			});
 		});
@@ -357,10 +374,10 @@
 		var guestInput = $('#form-guest-name');
 		var guestList = $('.guest-list');
 
-		addBtn.on('click', function() {
-			event.preventDefault(); 
+		addBtn.on('click', function () {
+			event.preventDefault();
 			var guestVal = guestInput.val();
-			var appendString = '<div><input class="form-control" type="text" value="'+guestVal+'"/><a href="#" class="remove_field"><i class="fa fa-trash"></i></a></div>';
+			var appendString = '<div><input class="form-control" type="text" value="' + guestVal + '"/><a href="#" class="remove_field"><i class="fa fa-trash"></i></a></div>';
 			if (guestVal == '') {
 				guestInput.focus();
 			} else {
@@ -369,22 +386,22 @@
 			}
 		});
 
-		$('.guest-list').on('click', '.remove_field', function(e){
+		$('.guest-list').on('click', '.remove_field', function (e) {
 			e.preventDefault();
 			$(this).parent('div').remove();
 		});
 	}
 
-	var collapseEvents = function() {
+	var collapseEvents = function () {
 		$('#accordion').on('show.bs.collapse hide.bs.collapse', function (e) {
 			var elemId = $(e.target).attr('id') + '0';
 
 			$('#accordion-img .collapse').collapse('hide');
-			$('#'+elemId).collapse('toggle');
+			$('#' + elemId).collapse('toggle');
 		});
 	}
 
-	var singlePost = function() {
+	var singlePost = function () {
 		var hightLight = $('.post-hightlight');
 
 		if ($('p').is('.post-hightlight')) {
@@ -393,10 +410,10 @@
 		}
 	}
 
-	var isotope = function() {
+	var isotope = function () {
 		var $container = $('.grid');
 
-		$container.imagesLoaded( function() {
+		$container.imagesLoaded(function () {
 			$container.isotope({
 				// options
 				itemSelector: '.grid-item',
@@ -408,52 +425,54 @@
 				getSortData: {
 					moments: '.moments', // text from querySelector
 					category: '[data-category]',
-					weight: function( itemElem ) { // function
-						var weight = $( itemElem ).find('.weight').text();
-						return parseFloat( weight.replace( /[\(\)]/g, '') );
+					weight: function (itemElem) { // function
+						var weight = $(itemElem).find('.weight').text();
+						return parseFloat(weight.replace(/[\(\)]/g, ''));
 					}
 				}
 			});
 		})
-		
+
 		// filter functions
 		var filterFns = {
 			// show if number is greater than 50
-			numberGreaterThan50: function() {
-			var number = $(this).find('.number').text();
-			return parseInt( number, 10 ) > 50;
+			numberGreaterThan50: function () {
+				var number = $(this).find('.number').text();
+				return parseInt(number, 10) > 50;
 			},
 			// show if name ends with -ium
-			ium: function() {
-			var name = $(this).find('.name').text();
-			return name.match( /ium$/ );
+			ium: function () {
+				var name = $(this).find('.name').text();
+				return name.match(/ium$/);
 			}
 		};
 		// bind filter button click
-		$('.filters-button-group').on( 'click', 'button', function() {
-			var filterValue = $( this ).attr('data-filter');
+		$('.filters-button-group').on('click', 'button', function () {
+			var filterValue = $(this).attr('data-filter');
 			// use filterFn if matches value
-			filterValue = filterFns[ filterValue ] || filterValue;
-			$container.isotope({ filter: filterValue });
+			filterValue = filterFns[filterValue] || filterValue;
+			$container.isotope({
+				filter: filterValue
+			});
 		});
 		// change is-checked class on buttons
-		$('.button-group').each( function( i, buttonGroup ) {
-			var $buttonGroup = $( buttonGroup );
-			$buttonGroup.on( 'click', 'button', function() {
-			$buttonGroup.find('.is-checked').removeClass('is-checked');
-			$( this ).addClass('is-checked');
+		$('.button-group').each(function (i, buttonGroup) {
+			var $buttonGroup = $(buttonGroup);
+			$buttonGroup.on('click', 'button', function () {
+				$buttonGroup.find('.is-checked').removeClass('is-checked');
+				$(this).addClass('is-checked');
 			});
 		});
 	}
 
-	$(function(){
+	$(function () {
 		pageScroll();
 		mobileMenuOutsideClick();
 		offcanvasMenu();
 		burgerMenu();
 		contentWayPoint();
 		dropdown();
-		testimonialCarousel();
+		// testimonialCarousel();
 		heroSwiper();
 		counter();
 		counterWayPoint();
@@ -464,6 +483,8 @@
 		singlePost();
 		isotope();
 		contactForm();
+		wishesForm();
+		getWishes();
 	});
 
 }());

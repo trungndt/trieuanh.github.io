@@ -1231,6 +1231,7 @@ img {
 /* Testimonials */
 .testimonials .wrap-testimony {
 	position: relative;
+	min-height: 300px;
 }
 .testimonials .testimony-slide {
 	text-align: center;
@@ -1664,6 +1665,43 @@ footer .copyright .block {
 	background-color: #fff;
 	opacity: .7;
 }
+.wishes-thanks {
+    padding: 30px;
+	text-align: center;
+	display: none;
+}
+.wishes-thanks h2 {
+	color: #d9ce72;
+	line-height: 1.2;
+}
+
+.testi-loader {
+	color: #d9ce72;
+	position: absolute;
+	box-sizing: border-box;
+	width: 0;
+	height: 0;
+	overflow: hidden;
+	z-index: 3;
+	background-color: #fff;
+	width: 100%;
+	height: 100%;
+	left: 0;
+	top: 0;
+}
+.testi-loader:after {
+	content: '';
+	position: absolute;
+	width: 48px;
+	height: 48px;
+	border: solid 8px #d9ce72;
+	border-left-color: transparent;
+	border-radius: 50%;
+	top: calc(50% - 24px);
+	left: calc(50% - 24px);
+	animation: rotate 1s linear infinite;
+}
+
 .guest-list > div {
 	margin-bottom: 20px;
 	position: relative;

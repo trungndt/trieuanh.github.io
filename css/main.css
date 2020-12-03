@@ -1232,12 +1232,12 @@ img {
 	display: inline-block;
 	zoom: 1;
 	*display: inline;
-	width: 100px;
-	height: 100px;
+	width: 150px;
+	height: 150px;
 }
 .testimonials .testimony-slide figure img {
-	width: 100px;
-	height: 100px;
+	width: 150px;
+	height: 150px;
 	border-radius: 50%;
 }
 .testimonials .testimony-slide blockquote {

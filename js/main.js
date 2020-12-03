@@ -44,7 +44,7 @@
 		$item.find('[data-role="name"]').html(name)
 		$item.find('[data-role="wish"]').html('"' + wish + '"')
 		if (avatar != '') {
-			$item.find('img').attr('src', avatar)
+			$item.find('.avatar').css('background-image', 'url(' + avatar + ')')
 		}
 		return $item
 	}

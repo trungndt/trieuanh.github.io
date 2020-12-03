@@ -1252,11 +1252,15 @@ img {
 	width: 150px;
 	height: 150px;
 }
-.testimonials .testimony-slide figure img {
+.testimonials .testimony-slide figure .avatar {
 	width: 150px;
 	height: 150px;
 	border-radius: 50%;
+	background-image: url('../img/friend/friend-default.jpg');
+	background-size: cover;
+	background-position: center;
 }
+
 .testimonials .testimony-slide blockquote {
 	border: none;
 	margin: 30px auto;

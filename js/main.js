@@ -1,4 +1,3 @@
-;
 (function () {
 	'use strict';
 
@@ -39,10 +38,26 @@
 		}(jQuery, window, document));
 	}
 
+	var validateWish = function(name, wish) {
+		var blacklist = [
+			'script',
+			'css',
+			'img',
+			'div',
+		]
+		var isValid = true
+		blacklist.forEach(function(e){
+			if (name.toLowerCase().indexOf(e) >= 0 || wish.toLowerCase().indexOf(e) >= 0) {
+				isValid = false
+			}
+		})
+		return isValid;
+	}
+
 	var getWishTemplate = function(name, wish, avatar) {
 		var $item = $($('#tmpWishItem').html().trim())
-		$item.find('[data-role="name"]').html(name)
-		$item.find('[data-role="wish"]').html('"' + wish + '"')
+		$item.find('[data-role="name"]').text(name)
+		$item.find('[data-role="wish"]').text('"' + wish + '"')
 		if (avatar != '') {
 			$item.find('.avatar').css('background-image', 'url(' + avatar + ')')
 		}
@@ -87,10 +102,12 @@
 					res.json().then(data => {
 						const wishesList = data.data;
 						wishesList.reverse().forEach(function(e) {
-							var $item = getWishTemplate(e.name, e.wish, e.avatar)
-							$container.find('.' + owlCls).append($item)
-							$loader.fadeOut();
+							if (validateWish(e.name, e.wish)) {
+								var $item = getWishTemplate(e.name, e.wish, e.avatar)
+								$container.find('.' + owlCls).append($item)
+							}
 						})
+						$loader.fadeOut();
 						testimonialCarousel();
 					}).catch(err => console.log(err))
 				} else {
